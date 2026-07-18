@@ -17,6 +17,8 @@
     --muted:#8C97AE;
     --gold:#C9A227;
     --gold-bright:#E8C468;
+    --accent-blue:#5B8DC0;
+    --accent-blue-bright:#8FC1E8;
     --line:rgba(237,239,243,0.09);
   }
 
@@ -126,23 +128,34 @@
 
   /* -- dashboard (the controlled story) -- */
   .dash-group{opacity:0; transform:scale(.97); transform-box:fill-box; transform-origin:center; animation:cardIn .5s ease-out forwards; animation-delay:1.55s;}
-  .dash-card{fill:var(--panel); stroke:rgba(201,162,39,0.35); stroke-width:1;}
-  .dash-dot{fill:var(--gold-bright); transform-box:fill-box; transform-origin:center; animation:dotPulse 2.6s ease-in-out infinite; animation-delay:2.2s;}
+  .dash-card{fill:var(--panel); stroke:rgba(201,162,39,0.45); stroke-width:1;}
+  .dash-accent{opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:1.65s;}
+  .dash-chip{fill:var(--gold-bright); transform-box:fill-box; transform-origin:center; animation:dotPulse 2.6s ease-in-out infinite; animation-delay:2.2s;}
   .dash-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.12em; fill:var(--muted);}
+  .dash-menu{fill:#5B6F94;}
   .dash-divider{stroke:rgba(237,239,243,0.12); stroke-width:1;}
-  .dash-bar{fill:var(--gold); transform-box:fill-box; transform-origin:bottom; transform:scaleY(0); animation:barGrow .5s cubic-bezier(.2,.8,.3,1) forwards;}
+  .dash-vline{stroke:rgba(237,239,243,0.1); stroke-width:1;}
+
+  .pivot-swatch{transform-box:fill-box; transform-origin:center; opacity:0; animation:swatchIn .35s ease-out forwards;}
+  .pivot-label{font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:.05em; fill:var(--paper); opacity:0; animation:labelIn .35s ease-out forwards;}
+  .pivot-bar{transform-box:fill-box; transform-origin:left; transform:scaleX(0); animation:barGrowX .45s cubic-bezier(.2,.8,.3,1) forwards;}
+
+  .dash-bar{fill:var(--accent-blue); transform-box:fill-box; transform-origin:bottom; transform:scaleY(0); animation:barGrow .5s cubic-bezier(.2,.8,.3,1) forwards;}
   .dash-spark{stroke:var(--gold-bright); stroke-width:2.2; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .6s ease-out forwards; animation-delay:2.05s;}
   .dash-spark-dot{fill:var(--gold-bright); opacity:0; animation:dotIn .3s ease-out forwards; animation-delay:2.6s;}
   .dash-ring-track{stroke:rgba(237,239,243,0.15); stroke-width:6; fill:none;}
-  .dash-ring{stroke:var(--gold); stroke-width:6; fill:none; stroke-linecap:round; stroke-dasharray:138; stroke-dashoffset:138; animation:ringDraw 1s ease-out forwards; animation-delay:2.15s; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center;}
+  .dash-ring{stroke:var(--gold); stroke-width:6; fill:none; stroke-linecap:round; stroke-dasharray:163; stroke-dashoffset:163; animation:ringDraw2 1s ease-out forwards; animation-delay:2.15s; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center;}
+  .dash-caption{font-family:'IBM Plex Mono', monospace; font-size:8px; letter-spacing:.1em; fill:var(--muted); opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:2.3s;}
 
   @keyframes draw{to{stroke-dashoffset:0;}}
-  @keyframes ringDraw{to{stroke-dashoffset:41;}}
+  @keyframes ringDraw2{to{stroke-dashoffset:49;}}
   @keyframes nodeIn{to{opacity:.55;}}
   @keyframes labelIn{to{opacity:.8;}}
+  @keyframes swatchIn{to{opacity:1;}}
   @keyframes dotIn{to{opacity:1;}}
   @keyframes cardIn{to{opacity:1; transform:scale(1);}}
   @keyframes barGrow{to{transform:scaleY(1);}}
+  @keyframes barGrowX{to{transform:scaleX(1);}}
   @keyframes dotPulse{0%,100%{opacity:1; transform:scale(1);}50%{opacity:.5; transform:scale(1.3);}}
 
   .reveal{
@@ -282,14 +295,16 @@
 
   @media (prefers-reduced-motion:reduce){
     .reveal,.noise-node,.noise-link,.noise-label,.converge-line,.converge-dot,
-    .beam-line,.dash-group,.dash-dot,.dash-bar,.dash-spark,.dash-spark-dot,.dash-ring{
+    .beam-line,.dash-group,.dash-accent,.dash-chip,.dash-bar,.dash-spark,.dash-spark-dot,
+    .dash-ring,.dash-caption,.pivot-swatch,.pivot-label,.pivot-bar{
       animation:none !important;
       opacity:1 !important;
       stroke-dashoffset:0 !important;
       transform:none !important;
     }
-    .dash-ring{stroke-dashoffset:41 !important; transform:rotate(-90deg) !important;}
+    .dash-ring{stroke-dashoffset:49 !important; transform:rotate(-90deg) !important;}
     .dash-bar{transform:scaleY(1) !important;}
+    .pivot-bar{transform:scaleX(1) !important;}
   }
 
   @media (max-width:640px){
@@ -358,26 +373,56 @@
             <path class="converge-line" pathLength="100" d="M145,285 Q430,300 700,195" style="animation-delay:.96s" />
             <path class="converge-line" pathLength="100" d="M355,205 Q560,200 700,195" style="animation-delay:1.03s" />
             <circle class="converge-dot" cx="700" cy="195" r="4" />
-            <path class="beam-line" pathLength="100" d="M700,195 C730,190 750,190 780,190" />
+            <path class="beam-line" pathLength="100" d="M700,195 C725,190 745,190 770,190" />
           </g>
 
           <!-- dashboard: the controlled story -->
+          <defs>
+            <linearGradient id="hubAccent" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#E8C468" />
+              <stop offset="100%" stop-color="#5B8DC0" />
+            </linearGradient>
+          </defs>
+
           <g class="dash-group">
-            <rect class="dash-card" x="780" y="60" width="380" height="260" rx="16" />
-            <circle class="dash-dot" cx="806" cy="90" r="4" />
-            <text class="dash-label" x="820" y="94">ALINEO HUB</text>
-            <line class="dash-divider" x1="800" y1="112" x2="1136" y2="112" />
+            <rect class="dash-card" x="770" y="50" width="400" height="290" rx="10" />
+            <rect class="dash-accent" x="774" y="52" width="392" height="3" fill="url(#hubAccent)" />
 
-            <rect class="dash-bar" x="808" y="260" width="24" height="40" rx="3" style="opacity:.55; animation-delay:1.7s" />
-            <rect class="dash-bar" x="844" y="236" width="24" height="64" rx="3" style="opacity:.7; animation-delay:1.8s" />
-            <rect class="dash-bar" x="880" y="248" width="24" height="52" rx="3" style="opacity:.85; animation-delay:1.9s" />
-            <rect class="dash-bar" x="916" y="190" width="24" height="110" rx="3" style="fill:var(--gold-bright); animation-delay:2.0s" />
+            <rect class="dash-chip" x="786" y="75" width="7" height="7" rx="1.5" />
+            <text class="dash-label" x="801" y="82">ALINEO HUB</text>
+            <circle class="dash-menu" cx="1128" cy="79" r="1.6" />
+            <circle class="dash-menu" cx="1138" cy="79" r="1.6" />
+            <circle class="dash-menu" cx="1148" cy="79" r="1.6" />
+            <line class="dash-divider" x1="774" y1="100" x2="1166" y2="100" />
+            <line class="dash-vline" x1="958" y1="118" x2="958" y2="322" />
 
-            <path class="dash-spark" pathLength="100" d="M960,270 C995,255 1015,205 1050,190 C1075,180 1100,165 1130,150" />
-            <circle class="dash-spark-dot" cx="1130" cy="150" r="4" />
+            <!-- pivot: breakdown by source -->
+            <rect class="pivot-swatch" x="786" y="133" width="8" height="8" rx="1.5" fill="var(--gold-bright)" style="animation-delay:1.65s" />
+            <text class="pivot-label" x="802" y="140" style="animation-delay:1.68s">SRC 01</text>
+            <rect class="pivot-bar" x="862" y="136" width="58" height="5" rx="2.5" fill="var(--gold-bright)" style="animation-delay:1.72s" />
 
-            <circle class="dash-ring-track" cx="1015" cy="270" r="22" />
-            <circle class="dash-ring" cx="1015" cy="270" r="22" />
+            <rect class="pivot-swatch" x="786" y="167" width="8" height="8" rx="1.5" fill="var(--accent-blue)" style="animation-delay:1.78s" />
+            <text class="pivot-label" x="802" y="174" style="animation-delay:1.81s">SRC 02</text>
+            <rect class="pivot-bar" x="862" y="170" width="42" height="5" rx="2.5" fill="var(--accent-blue)" style="animation-delay:1.85s" />
+
+            <rect class="pivot-swatch" x="786" y="201" width="8" height="8" rx="1.5" fill="var(--gold)" style="animation-delay:1.91s" />
+            <text class="pivot-label" x="802" y="208" style="animation-delay:1.94s">SRC 03</text>
+            <rect class="pivot-bar" x="862" y="204" width="32" height="5" rx="2.5" fill="var(--gold)" style="animation-delay:1.98s" />
+
+            <!-- coverage gauge -->
+            <circle class="dash-ring-track" cx="866" cy="270" r="26" />
+            <circle class="dash-ring" cx="866" cy="270" r="26" />
+            <text class="dash-caption" x="866" y="308" text-anchor="middle">COVERAGE</text>
+
+            <!-- combo chart: pivoted sources, resolved -->
+            <rect class="dash-bar" x="988" y="270" width="20" height="30" rx="2.5" style="opacity:.6; animation-delay:2.1s" />
+            <rect class="dash-bar" x="1016" y="252" width="20" height="48" rx="2.5" style="opacity:.8; animation-delay:2.18s" />
+            <rect class="dash-bar" x="1044" y="262" width="20" height="38" rx="2.5" style="opacity:.95; animation-delay:2.26s" />
+            <rect class="dash-bar" x="1072" y="220" width="20" height="80" rx="2.5" style="fill:var(--gold-bright); animation-delay:2.34s" />
+
+            <path class="dash-spark" pathLength="100" d="M992,238 C1020,222 1038,178 1066,160 C1088,146 1108,132 1128,118" style="animation-delay:2.4s" />
+            <circle class="dash-spark-dot" cx="1128" cy="118" r="4" style="animation-delay:2.85s" />
+            <text class="dash-caption" x="988" y="314" style="animation-delay:2.5s">Q1&#160;&#160;&#160;Q2&#160;&#160;&#160;Q3&#160;&#160;&#160;Q4</text>
           </g>
         </svg>
 
