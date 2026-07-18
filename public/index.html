@@ -112,26 +112,38 @@
     height:auto;
     display:block;
     margin-bottom:28px;
-    opacity:0.95;
   }
-  .signal-frag, .signal-line{
-    fill:none;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-dasharray:100;
-    stroke-dashoffset:100;
-    animation:draw 1.3s cubic-bezier(.3,.7,.4,1) forwards;
-  }
-  .signal-frag{stroke:#5B6F94; stroke-width:2; animation-delay:.15s;}
-  .signal-line{stroke:var(--gold); stroke-width:2.5; animation-delay:1.05s;}
-  .signal-dot{fill:#5B6F94; opacity:0; animation:dotIn .5s ease-out forwards;}
-  .signal-dot--final{fill:var(--gold-bright); opacity:0; animation:dotFinal .6s cubic-bezier(.3,1.4,.5,1) forwards; animation-delay:2.05s;}
-  .signal-glow{fill:var(--gold); opacity:0; filter:blur(10px); animation:glowIn 1s ease-out forwards; animation-delay:2.05s;}
+
+  /* -- noise cluster (fragmented sources) -- */
+  .noise-node{fill:#5B6F94; opacity:0; animation:nodeIn .45s ease-out forwards;}
+  .noise-link{stroke:#5B6F94; stroke-width:1; fill:none; opacity:.35; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .55s ease-out forwards;}
+  .noise-label{font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:.06em; fill:#7C88A2; opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:.55s;}
+
+  /* -- convergence (noise resolving to one line) -- */
+  .converge-line{stroke:#5B6F94; stroke-width:1.4; fill:none; opacity:.55; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .6s ease-out forwards;}
+  .converge-dot{fill:var(--gold); opacity:0; animation:dotIn .3s ease-out forwards; animation-delay:1.15s;}
+  .beam-line{stroke:var(--gold); stroke-width:2.5; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .4s ease-out forwards; animation-delay:1.3s;}
+
+  /* -- dashboard (the controlled story) -- */
+  .dash-group{opacity:0; transform:scale(.97); transform-box:fill-box; transform-origin:center; animation:cardIn .5s ease-out forwards; animation-delay:1.55s;}
+  .dash-card{fill:var(--panel); stroke:rgba(201,162,39,0.35); stroke-width:1;}
+  .dash-dot{fill:var(--gold-bright); transform-box:fill-box; transform-origin:center; animation:dotPulse 2.6s ease-in-out infinite; animation-delay:2.2s;}
+  .dash-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.12em; fill:var(--muted);}
+  .dash-divider{stroke:rgba(237,239,243,0.12); stroke-width:1;}
+  .dash-bar{fill:var(--gold); transform-box:fill-box; transform-origin:bottom; transform:scaleY(0); animation:barGrow .5s cubic-bezier(.2,.8,.3,1) forwards;}
+  .dash-spark{stroke:var(--gold-bright); stroke-width:2.2; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .6s ease-out forwards; animation-delay:2.05s;}
+  .dash-spark-dot{fill:var(--gold-bright); opacity:0; animation:dotIn .3s ease-out forwards; animation-delay:2.6s;}
+  .dash-ring-track{stroke:rgba(237,239,243,0.15); stroke-width:6; fill:none;}
+  .dash-ring{stroke:var(--gold); stroke-width:6; fill:none; stroke-linecap:round; stroke-dasharray:138; stroke-dashoffset:138; animation:ringDraw 1s ease-out forwards; animation-delay:2.15s; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center;}
 
   @keyframes draw{to{stroke-dashoffset:0;}}
-  @keyframes dotIn{to{opacity:.55;}}
-  @keyframes dotFinal{0%{opacity:0; transform:scale(.3);}70%{opacity:1; transform:scale(1.2);}100%{opacity:1; transform:scale(1);}}
-  @keyframes glowIn{to{opacity:.35;}}
+  @keyframes ringDraw{to{stroke-dashoffset:41;}}
+  @keyframes nodeIn{to{opacity:.55;}}
+  @keyframes labelIn{to{opacity:.8;}}
+  @keyframes dotIn{to{opacity:1;}}
+  @keyframes cardIn{to{opacity:1; transform:scale(1);}}
+  @keyframes barGrow{to{transform:scaleY(1);}}
+  @keyframes dotPulse{0%,100%{opacity:1; transform:scale(1);}50%{opacity:.5; transform:scale(1.3);}}
 
   .reveal{
     opacity:0;
@@ -269,12 +281,19 @@
   }
 
   @media (prefers-reduced-motion:reduce){
-    .signal-frag,.signal-line,.signal-dot,.signal-dot--final,.signal-glow,.reveal{
+    .reveal,.noise-node,.noise-link,.noise-label,.converge-line,.converge-dot,
+    .beam-line,.dash-group,.dash-dot,.dash-bar,.dash-spark,.dash-spark-dot,.dash-ring{
       animation:none !important;
       opacity:1 !important;
       stroke-dashoffset:0 !important;
       transform:none !important;
     }
+    .dash-ring{stroke-dashoffset:41 !important; transform:rotate(-90deg) !important;}
+    .dash-bar{transform:scaleY(1) !important;}
+  }
+
+  @media (max-width:640px){
+    .noise-label{display:none;}
   }
 </style>
 </head>
@@ -296,18 +315,70 @@
         <p class="eyebrow reveal">Signal, not noise</p>
         <p class="lede reveal">A punch of data and noise, fading into your new story — an amazing analytics hub.</p>
 
-        <svg class="signal" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
-          <path class="signal-frag" pathLength="100"
-            d="M20,150 L70,80 L115,140 L160,60 L200,115 L240,55 L280,110 L320,50 L360,100 L400,70 L440,105 L480,90" />
-          <path class="signal-line" pathLength="100"
-            d="M480,90 C620,108 740,30 860,45 C960,57 1080,42 1160,38" />
-          <circle class="signal-dot" cx="55" cy="35" r="3"></circle>
-          <circle class="signal-dot" cx="150" cy="170" r="2.4" style="animation-delay:.2s"></circle>
-          <circle class="signal-dot" cx="255" cy="150" r="3" style="animation-delay:.35s"></circle>
-          <circle class="signal-dot" cx="335" cy="25" r="2.4" style="animation-delay:.5s"></circle>
-          <circle class="signal-dot" cx="415" cy="145" r="2.8" style="animation-delay:.65s"></circle>
-          <circle class="signal-glow" cx="1160" cy="38" r="16"></circle>
-          <circle class="signal-dot--final" cx="1160" cy="38" r="5.5"></circle>
+        <svg class="signal" viewBox="0 0 1200 380" aria-hidden="true">
+
+          <!-- noise cluster: fragmented data sources -->
+          <g>
+            <line class="noise-link" pathLength="100" x1="70" y1="140" x2="190" y2="210" style="animation-delay:.25s" />
+            <line class="noise-link" pathLength="100" x1="111" y1="97" x2="250" y2="95" style="animation-delay:.30s" />
+            <line class="noise-link" pathLength="100" x1="190" y1="210" x2="279" y2="182" style="animation-delay:.35s" />
+            <line class="noise-link" pathLength="100" x1="60" y1="240" x2="145" y2="285" style="animation-delay:.40s" />
+            <line class="noise-link" pathLength="100" x1="250" y1="95" x2="335" y2="115" style="animation-delay:.45s" />
+            <line class="noise-link" pathLength="100" x1="279" y1="182" x2="321" y2="261" style="animation-delay:.50s" />
+            <line class="noise-link" pathLength="100" x1="145" y1="285" x2="210" y2="255" style="animation-delay:.55s" />
+            <line class="noise-link" pathLength="100" x1="335" y1="115" x2="355" y2="205" style="animation-delay:.60s" />
+            <line class="noise-link" pathLength="100" x1="95" y1="315" x2="210" y2="255" style="animation-delay:.65s" />
+            <line class="noise-link" pathLength="100" x1="60" y1="240" x2="95" y2="315" style="animation-delay:.70s" />
+
+            <circle class="noise-node" cx="70" cy="140" r="5" style="animation-delay:0s" />
+            <rect class="noise-node" x="104" y="90" width="14" height="14" rx="2" transform="rotate(18 111 97)" style="animation-delay:.03s" />
+            <circle class="noise-node" cx="190" cy="210" r="7" style="animation-delay:.06s" />
+            <rect class="noise-node" x="55" y="235" width="11" height="11" rx="2" transform="rotate(-15 60 240)" style="animation-delay:.09s" />
+            <circle class="noise-node" cx="250" cy="95" r="4" style="animation-delay:.12s" />
+            <rect class="noise-node" x="270" y="175" width="18" height="13" rx="2" style="animation-delay:.15s" />
+            <circle class="noise-node" cx="145" cy="285" r="6" style="animation-delay:.18s" />
+            <rect class="noise-node" x="315" y="255" width="12" height="12" rx="2" transform="rotate(-8 321 261)" style="animation-delay:.21s" />
+            <circle class="noise-node" cx="335" cy="115" r="5" style="animation-delay:.24s" />
+            <circle class="noise-node" cx="95" cy="315" r="4" style="animation-delay:.27s" />
+            <rect class="noise-node" x="205" y="250" width="10" height="10" rx="2" transform="rotate(22 210 255)" style="animation-delay:.30s" />
+            <circle class="noise-node" cx="355" cy="205" r="6" style="animation-delay:.33s" />
+
+            <text class="noise-label" x="82" y="128">CSV</text>
+            <text class="noise-label" x="258" y="86">API</text>
+            <text class="noise-label" x="341" y="106">CRM</text>
+            <text class="noise-label" x="118" y="302">SQL</text>
+            <text class="noise-label" x="285" y="168">LOGS</text>
+          </g>
+
+          <!-- convergence: many sources, one line -->
+          <g>
+            <path class="converge-line" pathLength="100" d="M70,140 Q400,80 700,195" style="animation-delay:.75s" />
+            <path class="converge-line" pathLength="100" d="M190,210 Q420,235 700,195" style="animation-delay:.82s" />
+            <path class="converge-line" pathLength="100" d="M335,115 Q520,130 700,195" style="animation-delay:.89s" />
+            <path class="converge-line" pathLength="100" d="M145,285 Q430,300 700,195" style="animation-delay:.96s" />
+            <path class="converge-line" pathLength="100" d="M355,205 Q560,200 700,195" style="animation-delay:1.03s" />
+            <circle class="converge-dot" cx="700" cy="195" r="4" />
+            <path class="beam-line" pathLength="100" d="M700,195 C730,190 750,190 780,190" />
+          </g>
+
+          <!-- dashboard: the controlled story -->
+          <g class="dash-group">
+            <rect class="dash-card" x="780" y="60" width="380" height="260" rx="16" />
+            <circle class="dash-dot" cx="806" cy="90" r="4" />
+            <text class="dash-label" x="820" y="94">ALINEO HUB</text>
+            <line class="dash-divider" x1="800" y1="112" x2="1136" y2="112" />
+
+            <rect class="dash-bar" x="808" y="260" width="24" height="40" rx="3" style="opacity:.55; animation-delay:1.7s" />
+            <rect class="dash-bar" x="844" y="236" width="24" height="64" rx="3" style="opacity:.7; animation-delay:1.8s" />
+            <rect class="dash-bar" x="880" y="248" width="24" height="52" rx="3" style="opacity:.85; animation-delay:1.9s" />
+            <rect class="dash-bar" x="916" y="190" width="24" height="110" rx="3" style="fill:var(--gold-bright); animation-delay:2.0s" />
+
+            <path class="dash-spark" pathLength="100" d="M960,270 C995,255 1015,205 1050,190 C1075,180 1100,165 1130,150" />
+            <circle class="dash-spark-dot" cx="1130" cy="150" r="4" />
+
+            <circle class="dash-ring-track" cx="1015" cy="270" r="22" />
+            <circle class="dash-ring" cx="1015" cy="270" r="22" />
+          </g>
         </svg>
 
         <h1 class="headline reveal">
