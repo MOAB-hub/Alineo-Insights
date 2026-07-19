@@ -155,7 +155,7 @@
   .beam-line{stroke:var(--gold-bright); stroke-width:3; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .4s ease-out forwards; animation-delay:1.3s; filter:url(#glowGold);}
 
   /* -- flow overlay: animated data packets traveling into the hub -- */
-  .flow-line{fill:none; stroke-linecap:round; opacity:0; animation:flowFadeIn .3s ease-out forwards, flowMove 2.6s linear infinite;}
+  .flow-line{fill:none; stroke-linecap:round; opacity:0; animation:flowFadeIn .3s ease-out forwards, flowMove 5.2s linear infinite;}
   .flow-gold{stroke:var(--gold-bright); filter:url(#glowGold);}
   .flow-blue{stroke:var(--accent-blue-bright); filter:url(#glowBlue);}
   @keyframes flowFadeIn{to{opacity:.95;}}
@@ -206,7 +206,6 @@
   .headline{animation-delay:.35s;}
   .sub{animation-delay:.55s;}
   .cta-row{animation-delay:.75s;}
-  .live-note{animation-delay:.9s;}
 
   @keyframes fadeUp{to{opacity:1; transform:translateY(0);}}
 
@@ -285,17 +284,6 @@
     font-size:0.78rem;
     color:var(--muted);
   }
-
-  .live-note{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.78rem;
-    letter-spacing:.02em;
-    color:#5B6F94;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .live-dot{width:6px; height:6px; border-radius:50%; background:var(--gold-bright); box-shadow:0 0 0 3px rgba(232,196,104,0.18); flex:none;}
 
   /* ---- sections ---- */
   .section{
@@ -749,7 +737,7 @@
     <section class="hero">
       <div class="wrap">
         <p class="eyebrow reveal">Built for hospitals &amp; healthcare facilities</p>
-        <p class="lede reveal">From noisy multi-facility data to a clear operational story — the Alineo Insights Analytics Hub.</p>
+        <p class="lede reveal">From noisy data to a clear operational story — the Alineo Insights Analytics Hub.</p>
 
         <svg class="signal" viewBox="0 0 1200 380" aria-hidden="true">
 
@@ -791,10 +779,10 @@
             <rect class="noise-node" x="205" y="250" width="10" height="10" rx="2" transform="rotate(22 210 255)" style="animation-delay:.30s" />
             <circle class="noise-node" cx="355" cy="205" r="6" style="animation-delay:.33s" />
 
-            <text class="noise-label" x="82" y="128">REVENUE</text>
+            <text class="noise-label" x="82" y="128">ADMISSIONS</text>
             <text class="noise-label" x="258" y="86">PAYER MIX</text>
-            <text class="noise-label" x="341" y="106">REGIONAL</text>
-            <text class="noise-label" x="118" y="302">OUTCOMES</text>
+            <text class="noise-label" x="341" y="106">PATIENT DAYS</text>
+            <text class="noise-label" x="118" y="302">REVENUE</text>
             <text class="noise-label" x="285" y="168">CENSUS</text>
           </g>
 
@@ -906,21 +894,19 @@
         </svg>
 
         <h1 class="headline reveal">
-          <span class="frag">Fragmented data.</span>
-          <span class="story">To a controlled story.</span>
+          <span class="frag">Fragmented data</span>
+          <span class="story">To a controlled story</span>
         </h1>
 
         <p class="sub reveal">
-          Alineo Insights unifies your revenue, payer mix, regional, and outcomes data
+          Alineo Insights unifies your admissions, patient days, revenue, and payer data
           into one operational story — so leadership acts on what's happening
-          today, not what a spreadsheet said last month.
+          today, not what a spreadsheet said last quarter.
         </p>
 
         <div class="cta-row reveal">
           <a class="cta-ghost" href="#how">See How It Works</a>
         </div>
-
-        <p class="live-note reveal"><span class="live-dot"></span>Already live with a healthcare operator unifying multi-facility data today. <span class="cta-note">// platform in active build</span></p>
       </div>
     </section>
 
@@ -967,7 +953,7 @@
           <div class="step">
             <div class="step-num">1</div>
             <h3>Connect</h3>
-            <p>Plug in your revenue, payer mix, regional, and outcomes exports — no rip-and-replace required.</p>
+            <p>Plug in your admissions, payer, revenue data, and outcomes exports — no rip-and-replace required.</p>
           </div>
           <div class="step">
             <div class="step-num">2</div>
@@ -977,7 +963,7 @@
           <div class="step">
             <div class="step-num">3</div>
             <h3>Act</h3>
-            <p>Get a weekly narrative summary and real-time alerts tied to what your team should actually do next.</p>
+            <p>Get a timely narrative summary with data tied to what your team should actually do next.</p>
           </div>
         </div>
       </div>
@@ -994,7 +980,7 @@
         <div class="platform-grid">
           <div class="platform-card">
             <p class="tag">Unify</p>
-            <p>One source of truth across revenue, payer mix, regional, and outcomes — no more manual exports.</p>
+            <p>One source of truth across all of your important data points</p>
           </div>
           <div class="platform-card">
             <p class="tag">Narrate</p>
@@ -1002,7 +988,7 @@
           </div>
           <div class="platform-card">
             <p class="tag">Act</p>
-            <p>Every insight ties to a workflow: staffing adjustments, payer follow-up, discharge planning.</p>
+            <p>Every insight ties to a workflow — a census shift becomes a staffing adjustment, a lagging payer rate becomes a follow-up call, a length-of-stay trend becomes a discharge review.</p>
           </div>
           <div class="platform-card">
             <p class="tag">Scale</p>
