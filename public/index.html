@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alineo Insights — Fragmented data. To a controlled story.</title>
-<meta name="description" content="Alineo Insights unifies EHR, billing, staffing, and outcomes data for rehabilitation & behavioral health operators into one operational story your team can act on.">
+<meta name="description" content="Alineo Insights unifies revenue, payer mix, regional, and outcomes data for hospitals and healthcare facilities into one operational story your team can act on.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
 
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.78rem;
     letter-spacing:0.16em;
     text-transform:uppercase;
     color:var(--gold);
@@ -147,7 +147,7 @@
   /* -- noise cluster (fragmented sources) -- */
   .noise-node{fill:#7C8CAD; opacity:0; animation:nodeIn .45s ease-out forwards;}
   .noise-link{stroke:var(--accent-blue-bright); stroke-width:1.2; fill:none; opacity:.5; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .55s ease-out forwards;}
-  .noise-label{font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:500; letter-spacing:.06em; fill:#C3CCDE; opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:.55s;}
+  .noise-label{font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:500; letter-spacing:.06em; fill:#C3CCDE; opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:.55s;}
 
   /* -- convergence (noise resolving to one line) -- */
   .converge-line{stroke:var(--accent-blue-bright); stroke-width:1.6; fill:none; opacity:.45; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .6s ease-out forwards;}
@@ -155,7 +155,7 @@
   .beam-line{stroke:var(--gold-bright); stroke-width:3; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .4s ease-out forwards; animation-delay:1.3s; filter:url(#glowGold);}
 
   /* -- flow overlay: animated data packets traveling into the hub -- */
-  .flow-line{fill:none; stroke-linecap:round; opacity:0; animation:flowFadeIn .3s ease-out forwards, flowMove 1.3s linear infinite;}
+  .flow-line{fill:none; stroke-linecap:round; opacity:0; animation:flowFadeIn .3s ease-out forwards, flowMove 2.6s linear infinite;}
   .flow-gold{stroke:var(--gold-bright); filter:url(#glowGold);}
   .flow-blue{stroke:var(--accent-blue-bright); filter:url(#glowBlue);}
   @keyframes flowFadeIn{to{opacity:.95;}}
@@ -166,13 +166,13 @@
   .dash-card{fill:var(--panel); stroke:rgba(201,162,39,0.45); stroke-width:1;}
   .dash-accent{opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:1.65s;}
   .dash-chip{fill:var(--gold-bright); transform-box:fill-box; transform-origin:center; animation:dotPulse 2.6s ease-in-out infinite; animation-delay:2.2s; filter:url(#glowGold);}
-  .dash-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.12em; fill:var(--muted);}
+  .dash-label{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; fill:var(--muted);}
   .dash-menu{fill:#5B6F94;}
   .dash-divider{stroke:rgba(237,239,243,0.12); stroke-width:1;}
   .dash-vline{stroke:rgba(237,239,243,0.1); stroke-width:1;}
 
   .pivot-swatch{transform-box:fill-box; transform-origin:center; opacity:0; animation:swatchIn .35s ease-out forwards;}
-  .pivot-label{font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:.05em; fill:var(--paper); opacity:0; animation:labelIn .35s ease-out forwards;}
+  .pivot-label{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.05em; fill:var(--paper); opacity:0; animation:labelIn .35s ease-out forwards;}
   .pivot-bar{transform-box:fill-box; transform-origin:left; transform:scaleX(0); animation:barGrowX .45s cubic-bezier(.2,.8,.3,1) forwards, pivotPulse 2.8s ease-in-out infinite;}
 
   .dash-bar{fill:url(#barBlueGrad); transform-box:fill-box; transform-origin:bottom; transform:scaleY(0); animation:barGrow .5s cubic-bezier(.2,.8,.3,1) forwards, barPulse 2.6s ease-in-out infinite;}
@@ -180,7 +180,7 @@
   .dash-spark-dot{fill:var(--gold-bright); opacity:0; animation:dotIn .3s ease-out forwards; animation-delay:2.6s; filter:url(#glowGold);}
   .dash-ring-track{stroke:rgba(237,239,243,0.15); stroke-width:6; fill:none;}
   .dash-ring{stroke:url(#ringGrad); stroke-width:6; fill:none; stroke-linecap:round; stroke-dasharray:163; stroke-dashoffset:163; animation:ringDraw2 1s ease-out forwards, ringPulse 3.2s ease-in-out infinite; animation-delay:2.15s, 3.15s; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center; filter:url(#glowGold);}
-  .dash-caption{font-family:'IBM Plex Mono', monospace; font-size:8px; letter-spacing:.1em; fill:var(--muted); opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:2.3s;}
+  .dash-caption{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; fill:var(--muted); opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:2.3s;}
 
   @keyframes draw{to{stroke-dashoffset:0;}}
   @keyframes ringDraw2{to{stroke-dashoffset:49;}}
@@ -406,7 +406,7 @@
   }
   .platform-card .tag{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.78rem;
     letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--gold-bright);
@@ -432,12 +432,12 @@
   .showcase-brand{
     display:flex; align-items:center; gap:8px;
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.78rem;
     letter-spacing:.12em;
     color:var(--muted);
   }
   .showcase-chip{width:7px; height:7px; border-radius:2px; background:var(--gold-bright);}
-  .showcase-tabs{display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:.06em;}
+  .showcase-tabs{display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:.06em;}
   .showcase-tabs span{color:var(--muted); padding-bottom:4px;}
   .showcase-tabs span.active{color:var(--gold-bright); border-bottom:1px solid var(--gold-bright);}
   .showcase-dots{display:flex; gap:5px;}
@@ -458,7 +458,7 @@
   }
   .kpi-label{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.66rem;
+    font-size:0.75rem;
     letter-spacing:.08em;
     text-transform:uppercase;
     color:var(--muted);
@@ -488,13 +488,13 @@
   }
   .chart-panel .panel-title{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.68rem;
+    font-size:0.75rem;
     letter-spacing:.08em;
     text-transform:uppercase;
     color:var(--muted);
     margin:0 0 12px;
   }
-  .chart-legend{display:flex; gap:16px; margin-top:10px; font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--muted);}
+  .chart-legend{display:flex; gap:16px; margin-top:10px; font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--muted);}
   .chart-legend span{display:inline-flex; align-items:center; gap:6px;}
   .chart-legend i{width:8px; height:8px; border-radius:2px; display:inline-block;}
 
@@ -508,7 +508,7 @@
   .mock-table th{
     text-align:left;
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.64rem;
+    font-size:0.75rem;
     letter-spacing:.06em;
     text-transform:uppercase;
     color:var(--muted);
@@ -529,7 +529,7 @@
   .showcase-caption{
     text-align:center;
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.78rem;
     color:#5B6F94;
     padding:16px 0 4px;
   }
@@ -555,7 +555,7 @@
   .price-badge{
     display:inline-block;
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.66rem;
+    font-size:0.75rem;
     letter-spacing:.1em;
     color:var(--ink-deep);
     background:var(--gold-bright);
@@ -566,7 +566,7 @@
   }
   .price-tag{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.78rem;
     letter-spacing:.12em;
     text-transform:uppercase;
     color:var(--gold);
@@ -646,7 +646,7 @@
   .footer-brand p{color:var(--muted); font-size:0.88rem; max-width:28ch; margin:0;}
   .footer-col h4{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.7rem;
+    font-size:0.78rem;
     letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--gold);
@@ -674,7 +674,7 @@
   }
   .footer-tag{
     font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
+    font-size:0.78rem;
     letter-spacing:0.12em;
     text-transform:uppercase;
     color:#5B6F94;
@@ -743,7 +743,7 @@
   <main id="top">
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow reveal">Built for rehab &amp; behavioral health operators</p>
+        <p class="eyebrow reveal">Built for hospitals &amp; healthcare facilities</p>
         <p class="lede reveal">From noisy multi-facility data to a clear operational story — the Alineo Insights Analytics Hub.</p>
 
         <svg class="signal" viewBox="0 0 1200 380" aria-hidden="true">
@@ -786,9 +786,9 @@
             <rect class="noise-node" x="205" y="250" width="10" height="10" rx="2" transform="rotate(22 210 255)" style="animation-delay:.30s" />
             <circle class="noise-node" cx="355" cy="205" r="6" style="animation-delay:.33s" />
 
-            <text class="noise-label" x="82" y="128">EHR</text>
-            <text class="noise-label" x="258" y="86">BILLING</text>
-            <text class="noise-label" x="341" y="106">STAFFING</text>
+            <text class="noise-label" x="82" y="128">REVENUE</text>
+            <text class="noise-label" x="258" y="86">PAYER MIX</text>
+            <text class="noise-label" x="341" y="106">REGIONAL</text>
             <text class="noise-label" x="118" y="302">OUTCOMES</text>
             <text class="noise-label" x="285" y="168">CENSUS</text>
           </g>
@@ -906,17 +906,16 @@
         </h1>
 
         <p class="sub reveal">
-          Alineo Insights unifies your EHR, billing, staffing, and outcomes data
+          Alineo Insights unifies your revenue, payer mix, regional, and outcomes data
           into one operational story — so leadership acts on what's happening
           today, not what a spreadsheet said last month.
         </p>
 
         <div class="cta-row reveal">
-          <a class="cta" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
           <a class="cta-ghost" href="#how">See How It Works</a>
         </div>
 
-        <p class="live-note reveal"><span class="live-dot"></span>Already live with a behavioral health operator unifying multi-facility data today. <span class="cta-note">// platform in active build</span></p>
+        <p class="live-note reveal"><span class="live-dot"></span>Already live with a healthcare operator unifying multi-facility data today. <span class="cta-note">// platform in active build</span></p>
       </div>
     </section>
 
@@ -931,7 +930,7 @@
           <div class="card">
             <p class="card-icon">✕ SYSTEMS</p>
             <h3>Disconnected Systems</h3>
-            <p>EHR, billing, staffing, and outcomes data live in five different tools that never talk to each other.</p>
+            <p>Revenue, payer mix, regional, and outcomes data live in five different tools that never talk to each other.</p>
           </div>
           <div class="card">
             <p class="card-icon">⏱ TIMING</p>
@@ -963,7 +962,7 @@
           <div class="step">
             <div class="step-num">1</div>
             <h3>Connect</h3>
-            <p>Plug in your EHR, billing, staffing, and outcomes exports — no rip-and-replace required.</p>
+            <p>Plug in your revenue, payer mix, regional, and outcomes exports — no rip-and-replace required.</p>
           </div>
           <div class="step">
             <div class="step-num">2</div>
@@ -990,7 +989,7 @@
         <div class="platform-grid">
           <div class="platform-card">
             <p class="tag">Unify</p>
-            <p>One source of truth across EHR, billing, staffing, and outcomes — no more manual exports.</p>
+            <p>One source of truth across revenue, payer mix, regional, and outcomes — no more manual exports.</p>
           </div>
           <div class="platform-card">
             <p class="tag">Narrate</p>
@@ -1053,10 +1052,10 @@
                   <polyline points="10,60 110,66 210,55 310,58 410,44" fill="none" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <circle cx="410" cy="25" r="4" fill="var(--gold-bright)"/>
                   <circle cx="410" cy="44" r="4" fill="var(--accent-blue)"/>
-                  <text x="10" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q1</text>
-                  <text x="105" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q2</text>
-                  <text x="205" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q3</text>
-                  <text x="305" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q4</text>
+                  <text x="10" y="132" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6F94">Q1</text>
+                  <text x="105" y="132" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6F94">Q2</text>
+                  <text x="205" y="132" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6F94">Q3</text>
+                  <text x="305" y="132" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5B6F94">Q4</text>
                 </svg>
                 <div class="chart-legend">
                   <span><i style="background:var(--gold-bright)"></i>Expected Reimbursement</span>
@@ -1097,7 +1096,7 @@
             <h3>Starter</h3>
             <p class="price-amount">$500–1,500<span>/mo per facility</span></p>
             <ul class="price-list">
-              <li>Unified dashboard across EHR, billing &amp; staffing</li>
+              <li>Unified Analytics Hub across revenue, payer mix &amp; regional</li>
               <li>Weekly auto-generated narrative summary</li>
               <li>Single-facility view</li>
             </ul>
@@ -1158,7 +1157,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <span class="brand">Alineo <em>Insights</em></span>
-          <p>From fragmented data to a controlled story — built for rehab &amp; behavioral health operators.</p>
+          <p>From fragmented data to a controlled story — built for hospitals &amp; healthcare facilities.</p>
         </div>
         <div class="footer-col">
           <h4>Product</h4>
