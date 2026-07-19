@@ -177,7 +177,7 @@
 
   .dash-bar{fill:url(#barBlueGrad); transform-box:fill-box; transform-origin:bottom; transform:scaleY(0); animation:barGrow .5s cubic-bezier(.2,.8,.3,1) forwards, barPulse 2.6s ease-in-out infinite;}
   .dash-spark{stroke:var(--gold-bright); stroke-width:2.6; fill:none; stroke-dasharray:100; stroke-dashoffset:100; animation:draw .6s ease-out forwards; animation-delay:2.05s; filter:url(#glowGold);}
-  .dash-spark-dot{fill:var(--gold-bright); opacity:0; animation:dotIn .3s ease-out forwards, dotPulse 2.6s ease-in-out infinite; animation-delay:2.6s, 2.9s; filter:url(#glowGold);}
+  .dash-spark-dot{fill:var(--gold-bright); opacity:0; animation:dotIn .3s ease-out forwards; animation-delay:2.6s; filter:url(#glowGold);}
   .dash-ring-track{stroke:rgba(237,239,243,0.15); stroke-width:6; fill:none;}
   .dash-ring{stroke:url(#ringGrad); stroke-width:6; fill:none; stroke-linecap:round; stroke-dasharray:163; stroke-dashoffset:163; animation:ringDraw2 1s ease-out forwards, ringPulse 3.2s ease-in-out infinite; animation-delay:2.15s, 3.15s; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center; filter:url(#glowGold);}
   .dash-caption{font-family:'IBM Plex Mono', monospace; font-size:8px; letter-spacing:.1em; fill:var(--muted); opacity:0; animation:labelIn .4s ease-out forwards; animation-delay:2.3s;}
@@ -895,7 +895,7 @@
             <rect class="dash-bar" x="1072" y="220" width="20" height="80" rx="2.5" style="fill:url(#barGoldGrad); filter:url(#glowGold); animation-delay:2.34s, 2.84s" />
 
             <path class="dash-spark" pathLength="100" d="M992,238 C1020,222 1038,178 1066,160 C1088,146 1108,132 1128,118" style="animation-delay:2.4s" />
-            <circle class="dash-spark-dot" cx="1128" cy="118" r="4" style="animation-delay:2.6s, 2.9s" />
+            <circle class="dash-spark-dot" cx="1128" cy="118" r="4" style="animation-delay:2.6s" />
             <text class="dash-caption" x="988" y="314" style="animation-delay:2.5s">Q1&#160;&#160;&#160;Q2&#160;&#160;&#160;Q3&#160;&#160;&#160;Q4</text>
           </g>
         </svg>
