@@ -1247,9 +1247,20 @@
       btnDesktop.addEventListener('click', function(){ setDevice('desktop'); });
       btnMobile.addEventListener('click', function(){ setDevice('mobile'); });
 
+      function isActualMobileDevice(){
+        if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+          return navigator.userAgentData.mobile;
+        }
+        return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      }
+
       var saved;
       try { saved = localStorage.getItem(KEY); } catch (e) {}
-      if (saved === 'mobile') setDevice('mobile');
+      if (saved === 'mobile' || saved === 'desktop') {
+        setDevice(saved);
+      } else if (isActualMobileDevice()) {
+        setDevice('mobile');
+      }
     })();
   </script>
 
