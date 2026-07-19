@@ -128,6 +128,46 @@
     box-shadow:0 8px 20px rgba(201,162,39,0.22);
   }
 
+  /* ---- device preview toggle ---- */
+  .device-toggle{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    background:var(--ink-deep);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:3px;
+  }
+  .device-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:.04em;
+    color:var(--muted);
+    background:none;
+    border:none;
+    border-radius:16px;
+    padding:6px 12px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .device-btn:hover{color:var(--paper);}
+  .device-btn.active{
+    background:var(--gold);
+    color:var(--ink-deep);
+  }
+
+  /* ---- device preview frame ---- */
+  .site-frame{container-type:inline-size; container-name:page;}
+  .site-frame.mobile-preview{
+    max-width:412px;
+    margin:0 auto;
+    border-left:1px solid var(--line-gold);
+    border-right:1px solid var(--line-gold);
+  }
+
   /* ---- hero ---- */
   .hero{
     position:relative;
@@ -667,7 +707,7 @@
     color:#5B6F94;
   }
 
-  @media (max-width:900px){
+  @container page (max-width:900px){
     .card-grid{grid-template-columns:repeat(2, 1fr);}
     .steps{grid-template-columns:1fr; gap:28px;}
     .platform-grid{grid-template-columns:repeat(2, 1fr);}
@@ -677,9 +717,9 @@
     .kpi-row{grid-template-columns:repeat(2, 1fr);}
   }
 
-  @media (max-width:640px){
+  @container page (max-width:640px){
     .nav-inner{height:auto; padding:16px 0;}
-    .nav-right{width:100%; justify-content:space-between;}
+    .nav-right{width:100%; justify-content:space-between; flex-wrap:wrap; row-gap:10px;}
     .nav-links{gap:18px;}
     .hero{padding:36px 0 64px;}
     .section{padding:56px 0;}
@@ -703,12 +743,14 @@
     .pivot-bar{transform:scaleX(1) !important;}
   }
 
-  @media (max-width:640px){
+  @container page (max-width:640px){
     .noise-label{display:none;}
   }
 </style>
 </head>
 <body>
+
+  <div class="site-frame" id="siteFrame">
 
   <header class="nav">
     <div class="wrap nav-inner">
@@ -720,6 +762,10 @@
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </nav>
+        <div class="device-toggle" role="group" aria-label="Preview site as">
+          <button type="button" class="device-btn active" id="deviceDesktop" data-device="desktop" aria-pressed="true">💻 Desktop</button>
+          <button type="button" class="device-btn" id="deviceMobile" data-device="mobile" aria-pressed="false">📱 Mobile</button>
+        </div>
         <a class="cta-sm" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
       </div>
     </div>
@@ -1110,6 +1156,8 @@
     </div>
   </footer>
 
+  </div><!-- /.site-frame -->
+
   <script>
     (function(){
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -1125,6 +1173,30 @@
         });
       }, { threshold: 0.12 });
       document.querySelectorAll('.reveal-io').forEach(function(el){ io.observe(el); });
+    })();
+
+    (function(){
+      var frame = document.getElementById('siteFrame');
+      var btnDesktop = document.getElementById('deviceDesktop');
+      var btnMobile = document.getElementById('deviceMobile');
+      var KEY = 'alineo-device-preview';
+
+      function setDevice(device){
+        var isMobile = device === 'mobile';
+        frame.classList.toggle('mobile-preview', isMobile);
+        btnDesktop.classList.toggle('active', !isMobile);
+        btnMobile.classList.toggle('active', isMobile);
+        btnDesktop.setAttribute('aria-pressed', String(!isMobile));
+        btnMobile.setAttribute('aria-pressed', String(isMobile));
+        try { localStorage.setItem(KEY, device); } catch (e) {}
+      }
+
+      btnDesktop.addEventListener('click', function(){ setDevice('desktop'); });
+      btnMobile.addEventListener('click', function(){ setDevice('mobile'); });
+
+      var saved;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved === 'mobile') setDevice('mobile');
     })();
   </script>
 
