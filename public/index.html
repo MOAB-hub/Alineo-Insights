@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alineo Insights — Fragmented data. To a controlled story.</title>
-<meta name="description" content="Alineo Insights turns scattered data from systems into one clear narrative your team can act on.">
+<meta name="description" content="Alineo Insights unifies EHR, billing, staffing, and outcomes data for rehabilitation & behavioral health operators into one operational story your team can act on.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
     --accent-blue:#5B8DC0;
     --accent-blue-bright:#8FC1E8;
     --line:rgba(237,239,243,0.09);
+    --line-gold:rgba(201,162,39,0.28);
   }
 
   *{box-sizing:border-box;}
@@ -52,14 +53,18 @@
 
   /* ---- nav ---- */
   .nav{
-    position:relative;
-    z-index:2;
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(10,22,40,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
   }
   .nav-inner{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    height:88px;
+    height:80px;
     flex-wrap:wrap;
     gap:12px;
   }
@@ -68,12 +73,14 @@
     font-size:1.3rem;
     font-weight:600;
     letter-spacing:-0.01em;
+    text-decoration:none;
   }
   .brand em{
     font-style:italic;
     font-weight:500;
     color:var(--gold-bright);
   }
+  .nav-right{display:flex; align-items:center; gap:36px;}
   .nav-links{
     display:flex;
     gap:32px;
@@ -103,10 +110,28 @@
   .nav-links a:hover{color:var(--paper);}
   .nav-links a:hover::after{transform:scaleX(1);}
 
+  .cta-sm{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--ink-deep);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.82rem;
+    padding:10px 20px;
+    border-radius:5px;
+    white-space:nowrap;
+    transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .cta-sm:hover{
+    background:var(--gold-bright);
+    transform:translateY(-1px);
+    box-shadow:0 8px 20px rgba(201,162,39,0.22);
+  }
+
   /* ---- hero ---- */
   .hero{
     position:relative;
-    padding:56px 0 96px;
+    padding:56px 0 88px;
     overflow:hidden;
   }
   .signal{
@@ -168,8 +193,13 @@
   .headline{animation-delay:.35s;}
   .sub{animation-delay:.55s;}
   .cta-row{animation-delay:.75s;}
+  .live-note{animation-delay:.9s;}
 
   @keyframes fadeUp{to{opacity:1; transform:translateY(0);}}
+
+  /* scroll-triggered reveal for below-fold content */
+  .reveal-io{opacity:0; transform:translateY(16px); transition:opacity .6s ease-out, transform .6s ease-out;}
+  .reveal-io.in{opacity:1; transform:translateY(0);}
 
   .lede{
     font-family:'Fraunces', serif;
@@ -177,7 +207,7 @@
     font-weight:500;
     font-size:1.05rem;
     color:var(--muted);
-    max-width:46ch;
+    max-width:50ch;
     margin:0 0 34px;
   }
 
@@ -201,12 +231,12 @@
   .sub{
     font-size:1.15rem;
     color:var(--paper);
-    max-width:44ch;
-    margin:0 0 40px;
+    max-width:48ch;
+    margin:0 0 32px;
     opacity:.88;
   }
 
-  .cta-row{display:flex; align-items:center; gap:20px; flex-wrap:wrap;}
+  .cta-row{display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:18px;}
 
   .cta{
     display:inline-block;
@@ -225,24 +255,48 @@
     box-shadow:0 12px 28px rgba(201,162,39,0.22);
   }
 
+  .cta-ghost{
+    display:inline-block;
+    text-decoration:none;
+    color:var(--paper);
+    font-weight:500;
+    font-size:0.95rem;
+    padding:14px 6px;
+    border-bottom:1px solid var(--line-gold);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .cta-ghost:hover{color:var(--gold-bright); border-color:var(--gold-bright);}
+
   .cta-note{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.78rem;
     color:var(--muted);
   }
 
+  .live-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:.02em;
+    color:#5B6F94;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .live-dot{width:6px; height:6px; border-radius:50%; background:var(--gold-bright); box-shadow:0 0 0 3px rgba(232,196,104,0.18); flex:none;}
+
   /* ---- sections ---- */
   .section{
-    padding:76px 0;
+    padding:84px 0;
     border-top:1px solid var(--line);
   }
+  .section-head{max-width:640px; margin:0 0 44px;}
   .section h2{
     font-family:'Fraunces', serif;
     font-weight:500;
     font-size:clamp(1.7rem, 3vw, 2.3rem);
     line-height:1.25;
     max-width:22ch;
-    margin:0 0 20px;
+    margin:0 0 18px;
     color:var(--paper);
   }
   .section p{
@@ -264,11 +318,336 @@
   }
   .contact a:hover{border-color:var(--gold-bright);}
 
+  /* ---- card grid (problem + platform) ---- */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:2px solid var(--line-gold);
+    border-radius:8px;
+    padding:24px 22px;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .card:hover{border-left-color:var(--gold-bright); transform:translateY(-3px);}
+  .card-icon{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--gold-bright);
+    letter-spacing:.1em;
+    margin:0 0 14px;
+  }
+  .card h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.08rem;
+    margin:0 0 10px;
+    color:var(--paper);
+  }
+  .card p{
+    font-size:0.92rem;
+    color:var(--muted);
+    margin:0;
+  }
+
+  /* ---- how it works ---- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+  }
+  .step-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--ink-deep);
+    background:var(--gold-bright);
+    width:32px; height:32px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+    font-weight:600;
+  }
+  .step h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.15rem;
+    margin:0 0 10px;
+  }
+  .step p{color:var(--muted); font-size:0.95rem; max-width:32ch;}
+
+  /* ---- platform section ---- */
+  .platform-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    margin-bottom:64px;
+  }
+  .platform-card{
+    background:var(--ink-deep);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 20px;
+  }
+  .platform-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin:0 0 12px;
+  }
+  .platform-card p{font-size:0.9rem; color:var(--muted); margin:0;}
+
+  /* ---- product showcase (mock dashboard) ---- */
+  .showcase-frame{
+    background:var(--panel);
+    border:1px solid var(--line-gold);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .showcase-accent{height:3px; background:linear-gradient(90deg, var(--gold-bright), var(--accent-blue));}
+  .showcase-topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 22px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap; gap:10px;
+  }
+  .showcase-brand{
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:.12em;
+    color:var(--muted);
+  }
+  .showcase-chip{width:7px; height:7px; border-radius:2px; background:var(--gold-bright);}
+  .showcase-tabs{display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:.06em;}
+  .showcase-tabs span{color:var(--muted); padding-bottom:4px;}
+  .showcase-tabs span.active{color:var(--gold-bright); border-bottom:1px solid var(--gold-bright);}
+  .showcase-dots{display:flex; gap:5px;}
+  .showcase-dots i{width:5px; height:5px; border-radius:50%; background:#5B6F94; display:block;}
+
+  .showcase-body{padding:26px 22px 22px;}
+  .kpi-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+    margin-bottom:24px;
+  }
+  .kpi-card{
+    background:var(--ink-deep);
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:16px 16px;
+  }
+  .kpi-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 8px;
+  }
+  .kpi-value{
+    font-family:'Fraunces', serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:var(--paper);
+    margin:0 0 4px;
+  }
+  .kpi-delta{font-size:0.78rem; font-family:'IBM Plex Mono', monospace;}
+  .kpi-delta.up{color:var(--gold-bright);}
+  .kpi-delta.down{color:var(--accent-blue-bright);}
+
+  .showcase-split{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:20px;
+  }
+  .chart-panel{
+    background:var(--ink-deep);
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:18px;
+  }
+  .chart-panel .panel-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+  .chart-legend{display:flex; gap:16px; margin-top:10px; font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--muted);}
+  .chart-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .chart-legend i{width:8px; height:8px; border-radius:2px; display:inline-block;}
+
+  .table-panel{
+    background:var(--ink-deep);
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:18px;
+  }
+  .mock-table{width:100%; border-collapse:collapse; font-size:0.82rem;}
+  .mock-table th{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.64rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    padding:0 0 10px;
+    font-weight:500;
+    border-bottom:1px solid var(--line);
+  }
+  .mock-table td{
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--paper);
+  }
+  .mock-table tr:last-child td{border-bottom:none;}
+  .mock-table td.num{font-family:'IBM Plex Mono', monospace; font-size:0.78rem;}
+  .mock-table .delta-up{color:var(--gold-bright);}
+  .mock-table .delta-down{color:var(--accent-blue-bright);}
+
+  .showcase-caption{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:#5B6F94;
+    padding:16px 0 4px;
+  }
+
+  /* ---- pricing ---- */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .price-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px 26px;
+    display:flex;
+    flex-direction:column;
+  }
+  .price-card.featured{
+    border-color:var(--gold);
+    box-shadow:0 20px 40px -16px rgba(201,162,39,0.25);
+  }
+  .price-badge{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:.1em;
+    color:var(--ink-deep);
+    background:var(--gold-bright);
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    width:fit-content;
+  }
+  .price-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 6px;
+  }
+  .price-card h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.3rem;
+    margin:0 0 14px;
+  }
+  .price-amount{
+    font-family:'Fraunces', serif;
+    font-size:1.7rem;
+    font-weight:600;
+    margin:0 0 22px;
+  }
+  .price-amount span{
+    font-family:'Inter', sans-serif;
+    font-size:0.85rem;
+    font-weight:400;
+    color:var(--muted);
+  }
+  .price-list{list-style:none; padding:0; margin:0 0 26px; flex:1;}
+  .price-list li{
+    font-size:0.9rem;
+    color:var(--muted);
+    padding:8px 0;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:10px;
+  }
+  .price-list li:first-child{border-top:none;}
+  .price-list li::before{content:"✓"; color:var(--gold-bright); flex:none;}
+  .price-cta{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.9rem;
+    padding:12px 20px;
+    border-radius:5px;
+    border:1px solid var(--line-gold);
+    color:var(--paper);
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .price-card.featured .price-cta{
+    background:var(--gold);
+    color:var(--ink-deep);
+    border-color:var(--gold);
+  }
+  .price-cta:hover{border-color:var(--gold-bright); color:var(--gold-bright);}
+  .price-card.featured .price-cta:hover{background:var(--gold-bright); color:var(--ink-deep);}
+
+  /* ---- final cta ---- */
+  .final-cta{
+    text-align:center;
+    background:
+      radial-gradient(ellipse 700px 300px at 50% 0%, rgba(201,162,39,0.12), transparent 65%);
+  }
+  .final-cta .section-head{margin:0 auto 32px; text-align:center;}
+  .final-cta h2{margin-left:auto; margin-right:auto;}
+  .final-cta p{margin-left:auto; margin-right:auto;}
+
   /* ---- footer ---- */
   .site-footer{
     border-top:1px solid var(--line);
-    padding:28px 0;
+    padding:48px 0 28px;
   }
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:24px;
+    padding-bottom:32px;
+  }
+  .footer-brand .brand{display:block; margin-bottom:10px;}
+  .footer-brand p{color:var(--muted); font-size:0.88rem; max-width:28ch; margin:0;}
+  .footer-col h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 14px;
+  }
+  .footer-col a{
+    display:block;
+    text-decoration:none;
+    color:var(--muted);
+    font-size:0.88rem;
+    margin-bottom:10px;
+    transition:color .2s ease;
+  }
+  .footer-col a:hover{color:var(--paper);}
   .footer-inner{
     display:flex;
     justify-content:space-between;
@@ -277,6 +656,8 @@
     gap:10px;
     color:var(--muted);
     font-size:0.85rem;
+    padding-top:24px;
+    border-top:1px solid var(--line);
   }
   .footer-tag{
     font-family:'IBM Plex Mono', monospace;
@@ -286,18 +667,33 @@
     color:#5B6F94;
   }
 
+  @media (max-width:900px){
+    .card-grid{grid-template-columns:repeat(2, 1fr);}
+    .steps{grid-template-columns:1fr; gap:28px;}
+    .platform-grid{grid-template-columns:repeat(2, 1fr);}
+    .showcase-split{grid-template-columns:1fr;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr; gap:28px;}
+    .kpi-row{grid-template-columns:repeat(2, 1fr);}
+  }
+
   @media (max-width:640px){
-    .nav-inner{height:auto; padding:20px 0;}
-    .nav-links{gap:20px;}
+    .nav-inner{height:auto; padding:16px 0;}
+    .nav-right{width:100%; justify-content:space-between;}
+    .nav-links{gap:18px;}
     .hero{padding:36px 0 64px;}
     .section{padding:56px 0;}
+    .card-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;}
+    .showcase-tabs{display:none;}
   }
 
   @media (prefers-reduced-motion:reduce){
     .reveal,.noise-node,.noise-link,.noise-label,.converge-line,.converge-dot,
     .beam-line,.dash-group,.dash-accent,.dash-chip,.dash-bar,.dash-spark,.dash-spark-dot,
-    .dash-ring,.dash-caption,.pivot-swatch,.pivot-label,.pivot-bar{
+    .dash-ring,.dash-caption,.pivot-swatch,.pivot-label,.pivot-bar,.reveal-io{
       animation:none !important;
+      transition:none !important;
       opacity:1 !important;
       stroke-dashoffset:0 !important;
       transform:none !important;
@@ -316,19 +712,24 @@
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <span class="brand">Alineo <em>Insights</em></span>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="brand" href="#top">Alineo <em>Insights</em></a>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#how">How It Works</a>
+          <a href="#platform">Platform</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="cta-sm" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
+      </div>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow reveal">Signal, not noise</p>
-        <p class="lede reveal">From noisy data to a clear story — the Alineo Insights Analytics Hub.</p>
+        <p class="eyebrow reveal">Built for rehab &amp; behavioral health operators</p>
+        <p class="lede reveal">From noisy multi-facility data to a clear operational story — the Alineo Insights Analytics Hub.</p>
 
         <svg class="signal" viewBox="0 0 1200 380" aria-hidden="true">
 
@@ -358,11 +759,11 @@
             <rect class="noise-node" x="205" y="250" width="10" height="10" rx="2" transform="rotate(22 210 255)" style="animation-delay:.30s" />
             <circle class="noise-node" cx="355" cy="205" r="6" style="animation-delay:.33s" />
 
-            <text class="noise-label" x="82" y="128">CSV</text>
-            <text class="noise-label" x="258" y="86">API</text>
-            <text class="noise-label" x="341" y="106">CRM</text>
-            <text class="noise-label" x="118" y="302">SQL</text>
-            <text class="noise-label" x="285" y="168">LOGS</text>
+            <text class="noise-label" x="82" y="128">EHR</text>
+            <text class="noise-label" x="258" y="86">BILLING</text>
+            <text class="noise-label" x="341" y="106">STAFFING</text>
+            <text class="noise-label" x="118" y="302">OUTCOMES</text>
+            <text class="noise-label" x="285" y="168">CENSUS</text>
           </g>
 
           <!-- convergence: many sources, one line -->
@@ -398,16 +799,16 @@
 
             <!-- pivot: breakdown by source -->
             <rect class="pivot-swatch" x="786" y="133" width="8" height="8" rx="1.5" fill="var(--gold-bright)" style="animation-delay:1.65s" />
-            <text class="pivot-label" x="802" y="140" style="animation-delay:1.68s">SRC 01</text>
-            <rect class="pivot-bar" x="862" y="136" width="58" height="5" rx="2.5" fill="var(--gold-bright)" style="animation-delay:1.72s" />
+            <text class="pivot-label" x="802" y="140" style="animation-delay:1.68s">FACILITY A</text>
+            <rect class="pivot-bar" x="900" y="136" width="58" height="5" rx="2.5" fill="var(--gold-bright)" style="animation-delay:1.72s" />
 
             <rect class="pivot-swatch" x="786" y="167" width="8" height="8" rx="1.5" fill="var(--accent-blue)" style="animation-delay:1.78s" />
-            <text class="pivot-label" x="802" y="174" style="animation-delay:1.81s">SRC 02</text>
-            <rect class="pivot-bar" x="862" y="170" width="42" height="5" rx="2.5" fill="var(--accent-blue)" style="animation-delay:1.85s" />
+            <text class="pivot-label" x="802" y="174" style="animation-delay:1.81s">FACILITY B</text>
+            <rect class="pivot-bar" x="900" y="170" width="42" height="5" rx="2.5" fill="var(--accent-blue)" style="animation-delay:1.85s" />
 
             <rect class="pivot-swatch" x="786" y="201" width="8" height="8" rx="1.5" fill="var(--gold)" style="animation-delay:1.91s" />
-            <text class="pivot-label" x="802" y="208" style="animation-delay:1.94s">SRC 03</text>
-            <rect class="pivot-bar" x="862" y="204" width="32" height="5" rx="2.5" fill="var(--gold)" style="animation-delay:1.98s" />
+            <text class="pivot-label" x="802" y="208" style="animation-delay:1.94s">FACILITY C</text>
+            <rect class="pivot-bar" x="900" y="204" width="32" height="5" rx="2.5" fill="var(--gold)" style="animation-delay:1.98s" />
 
             <!-- coverage gauge -->
             <circle class="dash-ring-track" cx="866" cy="270" r="26" />
@@ -432,31 +833,244 @@
         </h1>
 
         <p class="sub reveal">
-          Alineo Insights turns scattered data from systems into one clear
-          narrative your team can act on — no more numbers that raise more
-          questions than they answer.
+          Alineo Insights unifies your EHR, billing, staffing, and outcomes data
+          into one operational story — so leadership acts on what's happening
+          today, not what a spreadsheet said last month.
         </p>
 
         <div class="cta-row reveal">
-          <a class="cta" href="#contact">Get in touch</a>
-          <span class="cta-note">// currently in build</span>
+          <a class="cta" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
+          <a class="cta-ghost" href="#how">See How It Works</a>
+        </div>
+
+        <p class="live-note reveal"><span class="live-dot"></span>Already live with a behavioral health operator unifying multi-facility data today. <span class="cta-note">// platform in active build</span></p>
+      </div>
+    </section>
+
+    <section class="section problem reveal-io">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">The Problem</p>
+          <h2>Your data is everywhere. Your story is nowhere.</h2>
+          <p>Fragmented systems mean leadership makes decisions on lagging, incomplete data — every week, across every facility.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <p class="card-icon">✕ SYSTEMS</p>
+            <h3>Disconnected Systems</h3>
+            <p>EHR, billing, staffing, and outcomes data live in five different tools that never talk to each other.</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">⏱ TIMING</p>
+            <h3>Lagging Visibility</h3>
+            <p>By the time a report is built manually, the census dip or margin slip is already a month old.</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">▢ CONTEXT</p>
+            <h3>Numbers, No Narrative</h3>
+            <p>Charts show what happened. No tool explains why — or what to do about it next.</p>
+          </div>
+          <div class="card">
+            <p class="card-icon">⇄ SCALE</p>
+            <h3>No Portfolio View</h3>
+            <p>Multi-facility operators can't benchmark performance across sites without a Sunday-night spreadsheet.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section about">
+    <section id="how" class="section reveal-io">
       <div class="wrap">
-        <p class="eyebrow">About</p>
-        <h2>The story was always there. It just needed structure.</h2>
-        <p>
-          We're building Alineo Insights to turn scattered metrics into a single,
-          defensible narrative — the kind you can bring into a room and stand behind.
-          The site's under construction; the platform is next.
-        </p>
+        <div class="section-head">
+          <p class="eyebrow">How It Works</p>
+          <h2>From fragmented systems to one operating layer</h2>
+          <p>Live in weeks, not quarters — built on the data you already have.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Connect</h3>
+            <p>Plug in your EHR, billing, staffing, and outcomes exports — no rip-and-replace required.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Unify</h3>
+            <p>We normalize and merge every source into one live operational picture, per facility and across your portfolio.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>Act</h3>
+            <p>Get a weekly narrative summary and real-time alerts tied to what your team should actually do next.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="section contact">
+    <section id="platform" class="section reveal-io">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">The Platform</p>
+          <h2>Built for operators, not analysts</h2>
+          <p>Every insight ties back to a decision your team can act on today.</p>
+        </div>
+
+        <div class="platform-grid">
+          <div class="platform-card">
+            <p class="tag">Unify</p>
+            <p>One source of truth across EHR, billing, staffing, and outcomes — no more manual exports.</p>
+          </div>
+          <div class="platform-card">
+            <p class="tag">Narrate</p>
+            <p>Not just charts — a plain-language story of what changed, why, and what's next.</p>
+          </div>
+          <div class="platform-card">
+            <p class="tag">Act</p>
+            <p>Every insight ties to a workflow: staffing adjustments, payer follow-up, discharge planning.</p>
+          </div>
+          <div class="platform-card">
+            <p class="tag">Scale</p>
+            <p>One facility or fifty — the same operating layer, benchmarked across your whole portfolio.</p>
+          </div>
+        </div>
+
+        <!-- product showcase: mock dashboard, illustrative data only -->
+        <div class="showcase-frame">
+          <div class="showcase-accent"></div>
+          <div class="showcase-topbar">
+            <div class="showcase-brand"><span class="showcase-chip"></span>ALINEO HUB — OVERVIEW</div>
+            <div class="showcase-tabs">
+              <span class="active">Overview</span>
+              <span>Benchmarking</span>
+              <span>Payer Mix</span>
+            </div>
+            <div class="showcase-dots"><i></i><i></i><i></i></div>
+          </div>
+          <div class="showcase-body">
+            <div class="kpi-row">
+              <div class="kpi-card">
+                <p class="kpi-label">Expected Reimbursement</p>
+                <p class="kpi-value">$4.2M</p>
+                <p class="kpi-delta up">▲ 6.1% QoQ</p>
+              </div>
+              <div class="kpi-card">
+                <p class="kpi-label">Census</p>
+                <p class="kpi-value">86%</p>
+                <p class="kpi-delta up">▲ 2 pts</p>
+              </div>
+              <div class="kpi-card">
+                <p class="kpi-label">Exp Reim PPD</p>
+                <p class="kpi-value">$612</p>
+                <p class="kpi-delta down">▼ 1.3%</p>
+              </div>
+              <div class="kpi-card">
+                <p class="kpi-label">Facilities Live</p>
+                <p class="kpi-value">7</p>
+                <p class="kpi-delta up">▲ 2 this year</p>
+              </div>
+            </div>
+
+            <div class="showcase-split">
+              <div class="chart-panel">
+                <p class="panel-title">Rolling Quarters — Portfolio Trend</p>
+                <svg viewBox="0 0 420 140" width="100%" height="140" aria-hidden="true">
+                  <line x1="0" y1="35" x2="420" y2="35" stroke="var(--line)" stroke-width="1"/>
+                  <line x1="0" y1="70" x2="420" y2="70" stroke="var(--line)" stroke-width="1"/>
+                  <line x1="0" y1="105" x2="420" y2="105" stroke="var(--line)" stroke-width="1"/>
+                  <polyline points="10,95 110,80 210,60 310,42 410,25" fill="none" stroke="var(--gold-bright)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <polyline points="10,60 110,66 210,55 310,58 410,44" fill="none" stroke="var(--accent-blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="410" cy="25" r="4" fill="var(--gold-bright)"/>
+                  <circle cx="410" cy="44" r="4" fill="var(--accent-blue)"/>
+                  <text x="10" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q1</text>
+                  <text x="105" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q2</text>
+                  <text x="205" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q3</text>
+                  <text x="305" y="132" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5B6F94">Q4</text>
+                </svg>
+                <div class="chart-legend">
+                  <span><i style="background:var(--gold-bright)"></i>Expected Reimbursement</span>
+                  <span><i style="background:var(--accent-blue)"></i>Census</span>
+                </div>
+              </div>
+              <div class="table-panel">
+                <p class="panel-title">Top Facilities — Portfolio Benchmark</p>
+                <table class="mock-table">
+                  <thead>
+                    <tr><th>Facility</th><th>Exp Reim</th><th>QoQ</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Cedarbrook Recovery</td><td class="num">$1.4M</td><td class="num delta-up">▲ 8.2%</td></tr>
+                    <tr><td>Meridian Behavioral</td><td class="num">$980K</td><td class="num delta-up">▲ 4.1%</td></tr>
+                    <tr><td>Northgate Wellness</td><td class="num">$860K</td><td class="num delta-down">▼ 1.6%</td></tr>
+                    <tr><td>Harbor Point Health</td><td class="num">$720K</td><td class="num delta-up">▲ 2.9%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <p class="showcase-caption">Illustrative view — facility names and figures shown for demonstration.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section reveal-io">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Pricing</p>
+          <h2>Simple pricing that scales with your portfolio</h2>
+          <p>Every plan starts with a working pilot on your real data.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <p class="price-tag">MVP</p>
+            <h3>Starter</h3>
+            <p class="price-amount">$500–1,500<span>/mo per facility</span></p>
+            <ul class="price-list">
+              <li>Unified dashboard across EHR, billing &amp; staffing</li>
+              <li>Weekly auto-generated narrative summary</li>
+              <li>Single-facility view</li>
+            </ul>
+            <a class="price-cta" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo%20-%20Starter">Request a Demo</a>
+          </div>
+          <div class="price-card featured">
+            <span class="price-badge">MOST COMMON</span>
+            <p class="price-tag">Growth</p>
+            <h3>Portfolio</h3>
+            <p class="price-amount">$2K–5K<span>/mo per portfolio</span></p>
+            <ul class="price-list">
+              <li>Everything in Starter</li>
+              <li>Real-time alerts &amp; triggers</li>
+              <li>Staffing &amp; census forecasting</li>
+              <li>Cross-facility benchmarking</li>
+            </ul>
+            <a class="price-cta" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo%20-%20Portfolio">Request a Demo</a>
+          </div>
+          <div class="price-card">
+            <p class="price-tag">Scale</p>
+            <h3>Enterprise</h3>
+            <p class="price-amount">Custom</p>
+            <ul class="price-list">
+              <li>Everything in Portfolio</li>
+              <li>Predictive margin &amp; staffing models</li>
+              <li>Payer analytics</li>
+              <li>API access &amp; integrations</li>
+            </ul>
+            <a class="price-cta" href="mailto:hello@alineoinsights.com?subject=Enterprise%20Inquiry">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta reveal-io">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Get Started</p>
+          <h2>Ready to see your data tell a story?</h2>
+          <p>Book a 20-minute walkthrough with your own facility data — no slides, just your numbers.</p>
+        </div>
+        <a class="cta" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact reveal-io">
       <div class="wrap">
         <p class="eyebrow">Contact</p>
         <h2>Talk to us before the noise sets in.</h2>
@@ -467,11 +1081,52 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <span>&copy; 2026 Alineo Insights. All rights reserved.</span>
-      <span class="footer-tag">Fragmented &rarr; Controlled</span>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand">Alineo <em>Insights</em></span>
+          <p>From fragmented data to a controlled story — built for rehab &amp; behavioral health operators.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how">How It Works</a>
+          <a href="#platform">Platform</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Get Started</h4>
+          <a href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
+          <a href="mailto:hello@alineoinsights.com">hello@alineoinsights.com</a>
+        </div>
+      </div>
+      <div class="footer-inner">
+        <span>&copy; 2026 Alineo Insights. All rights reserved.</span>
+        <span class="footer-tag">Fragmented &rarr; Controlled</span>
+      </div>
     </div>
   </footer>
+
+  <script>
+    (function(){
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal-io').forEach(function(el){ el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal-io').forEach(function(el){ io.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
