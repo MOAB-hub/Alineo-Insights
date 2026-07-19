@@ -128,45 +128,8 @@
     box-shadow:0 8px 20px rgba(201,162,39,0.22);
   }
 
-  /* ---- device preview toggle ---- */
-  .device-toggle{
-    display:flex;
-    align-items:center;
-    gap:2px;
-    background:var(--ink-deep);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:3px;
-  }
-  .device-btn{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:.04em;
-    color:var(--muted);
-    background:none;
-    border:none;
-    border-radius:16px;
-    padding:6px 12px;
-    cursor:pointer;
-    transition:background .2s ease, color .2s ease;
-  }
-  .device-btn:hover{color:var(--paper);}
-  .device-btn.active{
-    background:var(--gold);
-    color:var(--ink-deep);
-  }
-
-  /* ---- device preview frame ---- */
+  /* ---- responsive container (breakpoints below query this) ---- */
   .site-frame{container-type:inline-size; container-name:page;}
-  .site-frame.mobile-preview{
-    max-width:412px;
-    margin:0 auto;
-    border-left:1px solid var(--line-gold);
-    border-right:1px solid var(--line-gold);
-  }
 
   /* ---- hero ---- */
   .hero{
@@ -769,10 +732,6 @@
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </nav>
-        <div class="device-toggle" role="group" aria-label="Preview site as">
-          <button type="button" class="device-btn active" id="deviceDesktop" data-device="desktop" aria-pressed="true">💻 Desktop</button>
-          <button type="button" class="device-btn" id="deviceMobile" data-device="mobile" aria-pressed="false">📱 Mobile</button>
-        </div>
         <a class="cta-sm" href="mailto:hello@alineoinsights.com?subject=Request%20a%20Demo">Request a Demo</a>
       </div>
     </div>
@@ -1226,41 +1185,6 @@
         });
       }, { threshold: 0.12 });
       document.querySelectorAll('.reveal-io').forEach(function(el){ io.observe(el); });
-    })();
-
-    (function(){
-      var frame = document.getElementById('siteFrame');
-      var btnDesktop = document.getElementById('deviceDesktop');
-      var btnMobile = document.getElementById('deviceMobile');
-      var KEY = 'alineo-device-preview';
-
-      function setDevice(device){
-        var isMobile = device === 'mobile';
-        frame.classList.toggle('mobile-preview', isMobile);
-        btnDesktop.classList.toggle('active', !isMobile);
-        btnMobile.classList.toggle('active', isMobile);
-        btnDesktop.setAttribute('aria-pressed', String(!isMobile));
-        btnMobile.setAttribute('aria-pressed', String(isMobile));
-        try { localStorage.setItem(KEY, device); } catch (e) {}
-      }
-
-      btnDesktop.addEventListener('click', function(){ setDevice('desktop'); });
-      btnMobile.addEventListener('click', function(){ setDevice('mobile'); });
-
-      function isActualMobileDevice(){
-        if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
-          return navigator.userAgentData.mobile;
-        }
-        return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      }
-
-      var saved;
-      try { saved = localStorage.getItem(KEY); } catch (e) {}
-      if (saved === 'mobile' || saved === 'desktop') {
-        setDevice(saved);
-      } else if (isActualMobileDevice()) {
-        setDevice('mobile');
-      }
     })();
   </script>
 
