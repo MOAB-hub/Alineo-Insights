@@ -2,15 +2,11 @@
 
 Source for [www.alineoinsights.com](https://www.alineoinsights.com), deployed on Cloudflare Workers.
 
-## `sandbox` branch
+## Working directly on `main`
 
-This branch is a homepage redesign for review — not deployed anywhere yet.
-It merges the animated hero / navy-gold visual identity from the current
-`main` site with the fuller marketing structure (problem, how it works,
-platform, pricing) from an earlier draft, restores rehab/behavioral-health
-positioning, and adds a mocked product showcase (illustrative facility
-names and figures only — no real customer data). `main` is untouched; this
-branch has to be merged deliberately for any of it to go live.
+There is no separate staging/sandbox branch — every push to `main` deploys
+straight to production at alineoinsights.com. Preview changes locally
+before pushing.
 
 To preview locally:
 
